@@ -4,12 +4,14 @@ A production-style full-stack life RPG for hackathon demos: real signup, Postgre
 
 Progress is **never** stored in `localStorage`. The source of truth is **Supabase PostgreSQL** with Row Level Security. Completing a quest, buying a relic, and leveling all go through SQL RPCs so clients cannot write their own XP.
 
-## Stack
+## Tech Stack
 
-- Next.js 15 (App Router) + TypeScript
-- Tailwind CSS + Framer Motion
-- Supabase Auth (email/password)
-- Supabase Postgres + RLS + RPCs
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Supabase Auth
+- PostgreSQL (Supabase)
 
 ## Features
 
@@ -77,16 +79,15 @@ npm start
 4. Add the production URL to Supabase Auth Site URL + Redirect URLs (`https://YOUR-APP.vercel.app/auth/callback`).
 5. Deploy.
 
-## Demo script (judges)
+## Judge Demo Flow
 
-1. **Signup** a new email → Command deck at level 1, starter badge/title/theme in inventory.
-2. **Create** a quest (e.g. “Ship the demo”, Intellect, Hard or Epic).
-3. **Complete** it.
-4. HUD shows **XP** and gold; Chronicle has a `task_completed` row.
-5. Complete more until **level** increases (level 1→2 needs 120 XP; two Hard quests or one Epic + one Normal).
-6. **Attribute** matching the quest increases; others stay put.
-7. Open **Tavern**: gold rose; buy/equip **Cyber Shrine** after level 2 (or equip starter relics). Theme chrome changes.
-8. **Refresh**, then **logout and login** (or another browser): same level, XP, stats, inventory, history — loaded from Postgres.
+Game data is stored in **Supabase / PostgreSQL**, not in `localStorage`. Completing a quest writes XP, gold, attributes, and history on the server so a refresh loads the same hero from the database.
+
+1. **Sign up / log in** — create an account (or log in) and land on the Command deck.
+2. **Create a quest** — open Quests → New quest, name it, pick an attribute and difficulty, then post it to the board.
+3. **Complete the quest** — press Complete on that contract.
+4. **Show XP, gold, and attribute increase** — the HUD updates XP and gold; the attribute you mapped to the quest goes up (and a reward toast confirms the seal).
+5. **Refresh the page** — reload the browser. Level, XP, gold, stats, quests, and chronicle remain, proving PostgreSQL persistence.
 
 ## Security model
 
