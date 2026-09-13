@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="void-ember"] {
+  --ink: 7 6 12;
+  --parchment: 244 232 210;
+  --ember: 232 141 58;
+  --glow: 255 196 110;
+  --moss: 110 214 168;
+  --danger: 255 107 107;
+  --panel: 18 14 28;
+  --line: 255 214 160;
+}
+
+[data-theme="cyber-shrine"] {
+  --ink: 4 8 16;
+  --parchment: 214 244 255;
+  --ember: 58 214 255;
+  --glow: 168 120 255;
+  --moss: 80 255 206;
+  --danger: 255 92 168;
+  --panel: 8 16 32;
+  --line: 120 230 255;
+}
+
+[data-theme="aurora-keep"] {
+  --ink: 4 12 12;
+  --parchment: 220 255 236;
+  --ember: 72 255 186;
+  --glow: 96 186 255;
+  --moss: 186 255 120;
+  --danger: 255 140 110;
+  --panel: 8 22 20;
+  --line: 140 255 210;
+}
+
+[data-theme="obsidian-sun"] {
+  --ink: 10 8 6;
+  --parchment: 255 236 210;
+  --ember: 255 186 48;
+  --glow: 255 120 48;
+  --moss: 255 214 96;
+  --danger: 255 88 70;
+  --panel: 22 12 8;
+  --line: 255 200 110;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: rgb(var(--ink));
+  color: rgb(var(--parchment));
+  background-image:
+    radial-gradient(1200px 700px at 12% -8%, rgb(var(--glow) / 0.16), transparent 55%),
+    radial-gradient(900px 520px at 100% 0%, rgb(var(--ember) / 0.14), transparent 50%),
+    linear-gradient(180deg, rgb(var(--ink)), rgb(8 6 14));
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+#__next,
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+*:focus-visible {
+  outline: 2px solid rgb(var(--ember));
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -40px;
+  z-index: 80;
+  background: rgb(var(--ember));
+  color: rgb(var(--ink));
+  padding: 0.5rem 0.9rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.panel {
+  background:
+    linear-gradient(180deg, rgb(var(--panel) / 0.92), rgb(var(--ink) / 0.88));
+  border: 1px solid rgb(var(--line) / 0.18);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 0.42), inset 0 1px 0 rgb(255 255 255 / 0.04);
+  border-radius: 1.25rem;
+}
+
+.rune-frame {
+  position: relative;
+}
+
+.rune-frame::before,
+.rune-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgb(var(--ember) / 0.7);
+  border-style: solid;
+}
+
+.rune-frame::before {
+  top: 10px;
+  left: 10px;
+  border-width: 2px 0 0 2px;
+}
+
+.rune-frame::after {
+  right: 10px;
+  bottom: 10px;
+  border-width: 0 2px 2px 0;
+}
+
+.xp-crystal {
+  height: 0.7rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(var(--line) / 0.18);
+}
+
+.xp-crystal > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(var(--ember)), rgb(var(--glow)));
+  box-shadow: 0 0 18px rgb(var(--ember) / 0.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
