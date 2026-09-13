@@ -89,6 +89,14 @@ Game data is stored in **Supabase / PostgreSQL**, not in `localStorage`. Complet
 4. **Show XP, gold, and attribute increase** — the HUD updates XP and gold; the attribute you mapped to the quest goes up (and a reward toast confirms the seal).
 5. **Refresh the page** — reload the browser. Level, XP, gold, stats, quests, and chronicle remain, proving PostgreSQL persistence.
 
+## Security & Persistence
+
+- **Authentication** is handled by **Supabase Auth** (email/password; sessions via `@supabase/ssr` cookies).
+- **User-specific data** (profiles, attributes, tasks, inventory, activity history) is protected with **PostgreSQL Row Level Security (RLS)** so a signed-in user can only access their own rows.
+- **Game state** (XP, level, gold, streaks, quests, relics, chronicle) is persisted in **Supabase PostgreSQL**, not in the browser.
+- This app **does not** use `localStorage` as the source of truth for game data.
+- Environment values such as the project URL and publishable key live in **`.env.local`**, which is listed in `.gitignore` and is **not committed** to GitHub. `.env.example` contains placeholders only.
+
 ## Security model
 
 | Action | Mechanism |
